@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/pin.css">
+
+</head>
+<body>
+    <div id="overly"></div>
+    <div id="createboard">
+        <h2>Create Board</h2>
+        <label for="name">name</label>
+        <input type="text" name="naam" id="naam" placeholder='Like "places to go" or "recipes to make"'>
+        <button id="create">Create</button>
+    </div>
+    <div id="main">
+        <div id="nav">
+        <div id="left">
+         <div id="icon">
+            <i class="ri-home-heart-fill"></i>
+            <h4>ideashub</h4>
+        </div>
+    </div>
+    <div id="middle">
+        <input type="text" placeholder="Search">
+    </div>
+    <div id="right">
+        <a href="/home"><h5>pins</h5></a>
+        <a href="/pin-builder"><h5>post</h5></a>
+        <a href="/logout" style="display: <%=user ? "inherit" : "none"%>;"><h4>logout</h4></a>
+         <a href="/profile"><div id="pp"><img src="<%=user ? user.profilepic : "https://i.pinimg.com/474x/8f/1b/09/8f1b09269d8df868039a5f9db169a772.jpg" %>" alt="<%=user.username  %>"></div></a>
+        </div>
+    </div>
+
+        <div id="pin">
+            <div id="pleft">
+                
+                <img src="<%=pin.pin%>" alt="<%=pin._id%>">
+            </div>
+            <div id="pright">
+                <div id="top">
+                        <div id="downloaded">downloaded</div>
+                        <div id="copied">copied</div>
+                        <div id="l">
+
+                            <i class="ri-download-2-fill" id="<%=pin.pin%>"></i>
+                            <i class="ri-share-box-line"></i>
+                            <i class="ri-link" id="<%=url%>"></i>
+                        </div>
+                        <div id="lol">
+
+                            <%if(user){%>
+                                <!-- <div id="edit" style="display: none;">Edit</div> -->
+
+                                <%if(user.pins.includes(pin._id)){%>
+                                    <button id="edit">Edit</button>
+                                <% } else {%>
+                                    <button id="edit" style="display: none;">Edit</button>
+                                <%}%>
+                            <%}%>
+                                
+                                    
+                            <button id="save"><%=save ? "Saved" : "Save"%></button>
+                            </div>
+                            </div>
+                    <div id="saveto">
+                        <h4>Select board <i class="ri-close-line"></i></h4>
+                        <div id="boards">
+                            <%if(user){%>
+                                <%user.albums.forEach((data)=>{%>
+                                    <p id="<%=data%>"><%=data%></p>
+                                    <%})%>
+                            <%}%>
+                        </div>
+                        <div id="createboards">
+                            <i class="ri-add-box-fill"></i>
+                            <p id="cret">create board</p>
+                        </div>
+                    </div>
+                <div id="text">
+                    <div id="inp">
+                        <input type="text" id="website"  placeholder="Enter website"><br>
+                        <input type="text" id="title" placeholder="Enter title"><br>
+                        <label for="" id="hundered">100</label>
+                        <textarea placeholder="Enter description" id="desc" cols="1" rows="1"></textarea>
+                        <label for="" id="fhundered">500</label>
+                    </div>
+                    <a href=""><%=pin.website%></a>
+                    <h1><%=pin.title%></h1>
+                    <p><%data = pin.description.split(" ")%>
+                       <%=data.length>50 ? data.slice(0,50).join(" ") : data.join(" ")%>.</p>
+                </div>
+                <button id="savedetails">Done</button>
+                <div id="profile">
+                    <div id="proleft">
+                       <a href="<%= pfile ? "/profile/" + pfile._id  : "#" %>"><div id="propic"><img src="<%=pin.createduser ? pin.createduser.profilepic : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRRIGHTlQywtKDVisfI0yIPfD8cccxvSc9uQ&usqp=CAU"  %>" alt=""></div></a>
+                        <div id="nf">
+                            <a href="<%= pfile ? "/profile/" + pfile._id  : "#" %>" id="pprile"><h4><%=username%></h4></a>
+                            <p><%= followers%> followers</p>
+                        </div>
+                    </div>
+                    <div id="proright">
+                        <% if(user){ %>
+                        <button><%= user.following.includes(userid) ? "following" : "follow"%></button>
+                        <% } else {%>
+                            <button>follow</button>
+                        <%}%>
+                    </div>
+                </div>
+                <div id="comments">
+                    <h4><span><%=pin.comment.length%></span> Comments</h4>
+                    <i class="ri-arrow-right-s-line"></i>
+                </div>
+                <div id="comment-section">
+                    <%pin.comment.forEach((data,i)=>{ %>
+                        <div id="cmnt<%=i%>" class="cmnt" style="display: <%=i+1>2 ? "none" : "flex" ;%>">
+                            <div id="propic">
+                                <img src="<%=data.user.profilepic%>" alt="">
+                            </div>
+                            <p>
+                                <span><%=data.user.username%></span>: <%=data.comment%> 
+                                <a href="/deletecomment/<%=data._id%>/<%=pin._id%>"><i class="ri-close-circle-line" style="display: <%=user.username === data.user.username ? "inherit" : "none";%>"</i></i></a>
+                            </p>
+                        </div>
+                    <% }) %>
+                    <button id="show-more" style="display: <%=pin.comment.length>2 ? "inherit" : "none" %>;">show more</button>
+                </div>
+                <% if(user){ %>
+                    <div id="addcomment">
+                        <div id="propic"><img src="<%=user.profilepic%>" alt=""></div>
+                        <input id="comment" type="text" placeholder="add comment"> 
+                        <a href="/" style="display: none;"> to comment</a>
+                    </div>                    
+                    <% } else {%>
+                        <div id="addcomment">
+                            <a href="/">Login to comment</a>
+                            <input id="comment" type="text" placeholder="add comment" style="display:none;"> 
+                    </div>
+                <%}%>
+                
+                <button id="done">done</button>
+
+                <%if(user){%>
+    
+                    <%if(user.pins.includes(pin._id)){%>
+                        <a href="delete/<%=pin._id%>"><button id="delete">Delete Pin</button></a>
+                        <%}%>
+                <%}%>
+            </div>
+        </div>
+
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.2/axios.min.js" integrity="sha512-bHeT+z+n8rh9CKrSrbyfbINxu7gsBmSHlDCb3gUF1BjmjDzKhoKspyB71k0CIRBSjE5IVQiMMVBgCWjF60qsvA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/javascripts/showpin.js"></script>
+</body>
+</html>

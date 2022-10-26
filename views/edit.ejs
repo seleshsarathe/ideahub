@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="stylesheets/edit.css">
+</head>
+<body>
+    <div id="main">
+
+        <div id="nav">
+            <div id="left">
+             <div id="icon">
+                <i class="ri-home-heart-fill"></i>
+                <h4>ideashub</h4>
+            </div>
+        </div>
+        <div id="middle">
+            <input type="text" placeholder="Search">
+        </div>
+        <div id="right">
+            <a href="/home"><h5>pins</h5></a>
+            <a href="/pin-builder"><h5>post</h5></a>
+            <a href="/logout" style="display: <%=user ? "inherit" : "none"%>;"><h4>logout</h4></a>
+             <a href="/profile"><div id="pp"><img src="<%=user ? user.profilepic : "https://i.pinimg.com/474x/8f/1b/09/8f1b09269d8df868039a5f9db169a772.jpg" %>" alt=""></div></a>
+            </div>
+        </div>
+        <div id="change">
+            <h1>Public Profile</h1>
+            <h3>People visiting your profile will see the following info</h3>
+                <form action="/profilephoto" method="post" enctype="multipart/form-data">
+                    <label for="phot">Photo</label>
+                    <div id="changepp">
+                        <div id="photu">
+
+                            <div id="photo">
+                                <img src="<%=user.profilepic%>" alt="">
+                            </div>
+                        </div>
+                        <label for="file">Change</label>
+                        <input type="file" id="file" name="file" >
+                    </div>
+                    <div id="name" class="int">
+                        <label for="naam">Edit your name</label>
+                        <input type="text" placeholder="Full name" name="naam" value="<%=user.name ? user.name : "" %>">
+                    </div>
+                    <div id="email" class="int">
+                        <label for="emal">Edit your email</label>
+                        <input type="email" placeholder="Email" name="email" value="<%=user.email%>" id="emal">
+                    </div>
+                    <div id="uuname" class="int">
+                        <label for="uname" id="usernme">Edit your username</label>
+                        <input type="text" placeholder="Username" name="username" id="uname" value="<%=user.username%>">
+                    </div>
+                    <button id="submit" type="submit">Submit</button>
+                    <button id="reset">Reset</button>
+                </form>
+
+                <form action="/setpwsd" method="post">
+                    <div id="password" >
+                    <h2>Change Password</h2>
+                    <label for="">Old password</label>
+                        <input type="password" placeholder="Old password" id="oldpwsd" name="oldpwsd">
+                        <label for="">New password</label>
+                        <input type="password" placeholder="New password" name="newpwsd" id="newpwsd">
+                        <label for="">Confirm password</label>
+                        <input type="password" placeholder="Confirm password" id="conpwsd">
+                        <button id="cpwsd" type="submit">Change Password</button>
+                    </div>
+                </form>        
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.2/axios.min.js" integrity="sha512-bHeT+z+n8rh9CKrSrbyfbINxu7gsBmSHlDCb3gUF1BjmjDzKhoKspyB71k0CIRBSjE5IVQiMMVBgCWjF60qsvA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="javascripts/edit.js"></script>
+</body>
+</html>

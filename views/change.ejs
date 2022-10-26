@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/stylesheets/change.css">
+</head>
+<body>
+    <div id="main">
+        <div id="otp"><%=otp%></div>
+        <div id="id"><%=id%></div>
+        <div id="nav">
+            <div id="left">
+             <div id="icon">
+                <i class="ri-home-heart-fill"></i>
+                <h4>ideashub</h4>
+            </div>
+        </div>
+        <div id="middle">
+            <input type="text" placeholder="Search">
+        </div>
+        <div id="right">
+            <a href="/home"><h5>pins</h5></a>
+            <a href="/pin-builder"><h5>post</h5></a>
+            <a href="/logout" style="display: <%=pic ? "inherit" : "none"%>;"><h4>logout</h4></a>
+             <a href="/profile"><div id="pp"><img src="<%=pic ? pic.profilepic : "https://i.pinimg.com/474x/8f/1b/09/8f1b09269d8df868039a5f9db169a772.jpg" %>" alt=""></div></a>
+            </div>
+        </div>
+    confirm
+    <% if(state === "link"){ %>
+
+        <div id="pick">
+            <h1>Link expired</h1>
+            <a href="/">Back to login page</a>
+        </div>
+        
+    <% } else if(state === "lol"){ %>
+        <div id="pick">
+            <h1>Link used</h1>
+            <a href="/">Back to login page</a>
+        </div>
+            
+    <%} else{ %>
+    <div id="pick">
+        <h1>pick a new password</h1>
+        <input type="password" name="password" id="password" placeholder="new password">
+        <input type="password" name="npassword" id="npassword" placeholder=" password">
+        <button id="cp">Change Password</button>
+    </div>
+   <% }%>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.2/axios.min.js" integrity="sha512-bHeT+z+n8rh9CKrSrbyfbINxu7gsBmSHlDCb3gUF1BjmjDzKhoKspyB71k0CIRBSjE5IVQiMMVBgCWjF60qsvA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/javascripts/change.js"></script>
+</body>
+</html>

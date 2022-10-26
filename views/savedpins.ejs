@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/savedpins.css">
+</head>
+
+<body>
+    <div id="nav">
+        <div id="left">
+         <div id="icon">
+            <i class="ri-home-heart-fill"></i>
+            <h4>ideashub</h4>
+        </div>
+    </div>
+    <div id="middle">
+        <input type="text" placeholder="Search">
+    </div>
+    <div id="right">
+        <a href="/home"><h5>pins</h5></a>
+        <a href="/pin-builder"><h5>post</h5></a>
+        <a href="/logout"><h4>logout</h4></a>
+         <a href="/profile"><div id="pp"><img src="<%=user.profilepic%>" alt=""></div></a>
+        </div>
+    </div>
+    
+    <div class="pin_container">
+      <%pin.forEach((data)=>{ %>
+        <%if(name === "allpins"){%>
+            <div class="card">
+                <img id="<%=data.pinid%>" src="<%=data.pin%>" alt="">
+            </div>
+        <% }else{ %>
+            <%if (data.sharedto === name){ %>
+                <div class="card">
+                    <img id="<%=data.pinid%>" src="<%=data.pin%>" alt="">
+                </div>
+            <% } %>
+       <% } %>
+         <% }) %>
+         
+        
+    </div>
+    <script src="/javascripts/savedpins.js"></script>
+</body>
+
+</html>

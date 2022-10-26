@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="stylesheets/home.css">
+</head>
+
+<body>
+    <div id="nav">
+        <div id="left">
+         <div id="icon">
+            <i class="ri-home-heart-fill"></i>
+            <h4>ideashub</h4>
+        </div>
+    </div>
+    <div id="middle">
+        <input type="text" placeholder="Search">
+    </div>
+    <div id="right">
+        <a href="/home"><h5>pins</h5></a>
+        <a href="/pin-builder"><h5>post</h5></a>
+        <a href="/logout" style="display: <%=pic ? "inherit" : "none"%>;"><h4>logout</h4></a>
+         <a href="/profile"><div id="pp"><img src="<%=pic ? pic.profilepic : "https://i.pinimg.com/474x/8f/1b/09/8f1b09269d8df868039a5f9db169a772.jpg" %>" alt=""></div></a>
+        </div>
+    </div>
+    
+    <div class="pin_container">
+      <%user.forEach((data)=>{ %>
+         <div class="card">
+            <a href="pin/<%=data._id%>"><img id="<%=data._id%>" src="<%=data.pin%>" alt=""></a>
+            <p><%=data.title.length>40 ? data.title.slice(0,41) + "..." : data.title %></p>
+         </div>
+         <% }) %>
+         
+        
+    </div>
+    <script src="javascripts/home.js"></script>
+</body>
+
+</html>

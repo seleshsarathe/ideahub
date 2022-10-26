@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@200;300;400;500;600;700&display=swap');
+*{
+  margin:0%;
+  padding:0%;
+  box-sizing: border-box;
+  font-family: 'Noto Sans Ethiopic';
+}
+html,body{
+  width:100%;
+  height:100%;
+}
+#image{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+#overlay{
+  position: absolute;
+  top: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+background-color: rgba(0, 0, 0, 0.6);
+}
+
+#image img{
+  width: 100%;
+}
+#main{
+  width:100%;
+  height:100%;
+  display: flex;
+}
+
+#left{
+  position: relative;
+  width: 50%;
+  height: 100%;
+}
+
+#left h1{
+  position: absolute;
+  font-weight: 600;
+  color: white;
+  font-size: 60px;
+  transform: translate(-50%,-50%);
+  top: 50%;
+  left: 40%;
+}
+
+#right{
+  position: relative;
+  z-index: 99;
+  width: 50%;
+  height: 100%;
+}
+#card{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  padding: 40px 60px;
+  transform: translate(-50%,-50%);
+  width: 50%;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  display: flex;
+  border-radius: 30px;
+}
+form{
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+}
+#card .ri-home-heart-fill{
+  font-size: 40px;
+  color: #9b1fe9;
+}
+#card h1{
+  letter-spacing: -1px;
+  padding-top: 10px;
+  font-weight: 400;
+  font-size: 30px;
+}
+#card h5{
+  margin-bottom: 20px;
+  font-size: 15px;
+  font-weight: 300;
+  color: rgb(0, 0, 0);
+}
+form input{
+  outline: pink;
+  transition: 0.1s;
+  margin-top: 5px;
+  border-radius: 13px;
+  padding: 10px;
+  border: 2px solid rgb(207, 207, 207);
+  width: 100%;
+}
+
+form input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(58, 123, 255, 0.8);
+}
+form label{
+  transition: 0.1s;
+  color: rgb(51, 51, 51);
+  font-size: 13px;
+  margin-top: 10px;
+  margin-left: 8px;
+}
+form button{
+  margin-top: 15px;
+  width: 100%;
+  padding: 9px;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 800;
+  color: white;
+  background-color: #9b1fe9;
+}
+#buisness{
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  color: rgb(58, 58, 58);
+  font-size: 10px;
+}
+#buisness h2{
+  border-radius: 0px 0px 30px 30px;
+  overflow: hidden;
+  padding: 20px;
+  background-color: rgba(128, 128, 128, 0.3);
+}
+#card p{
+  margin-top:15px ;
+  width: 70%;
+  text-align: center;
+  font-size: 11px;
+  color: rgb(134, 134, 134);
+  margin-bottom: 30px;
+}
+#card p span{
+  font-weight: 600;
+  color: black;
+}
+#card h4{
+  margin-bottom: 70px;
+  font-size: 15px;
+  font-weight: 500;
+}
+#card h4 a{
+  cursor: pointer;
+  text-decoration: none;
+  color: rgb(43, 43, 43);
+}
+#forgot{
+  display: none;
+  margin-bottom: 10px;
+  color: rgb(0, 15, 63);
+  font-size: 13px;
+  transition: 0.2s;
+  cursor: pointer;
+}
+#forget-email{
+  outline:none;
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.418);
+  border-radius: 30px;
+  padding: 5px 20px;
+  transition: cubic-bezier(0.19, 1, 0.22, 1) 0.5s;
+  display: inline-block;
+}
+#forget-email:focus{
+  box-shadow: 0px 0px 0px 2px rgb(0, 140, 255);
+}
+#smt{
+  width: 30px;
+  position: absolute;
+  right: 0;
+  border-radius: 0px 30px 30px 0px;
+  top: 0%;
+  background-color: rgb(0, 140, 255);
+  height: 100%;
+}
+#submit{
+  width: 64%;
+  opacity: 0;
+  transition: cubic-bezier(0.19, 1, 0.22, 1) 0.5s;
+  position: absolute;
+  transform: translateX(200px);
+  bottom: 22%;
+}
+#smt i{
+  font-size: 18px;
+  transition: 0.1s;
+  color: white;
+  position: absolute;
+  transform: translate(-50%,-50%);
+  left: 40%;
+  top: 50%;
+}
+#smt i:hover{
+  left: 50%;
+  font-size: 20px;
+}
