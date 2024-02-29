@@ -28,6 +28,7 @@ html,body{
     background-color: white;
     width: 100%;
     position: fixed;
+    z-index: 99999;
     display: flex;
     justify-content: space-between;
     padding: 10px 30px;
@@ -197,6 +198,7 @@ html,body{
     position: absolute;
     font-size: 40px;
     right: 1%;
+    cursor: pointer;
     bottom: 40%;
 }
 #createboard{
@@ -238,7 +240,7 @@ html,body{
     color: white;
     border-radius: 10px;
     padding: 10px;
-    margin-left: 265px;
+    margin-left: 310px;
 }
 #createboard button:hover{
     background-color: #7217aa;
@@ -294,6 +296,7 @@ html,body{
     transform: scale(0.95);
 }
 #pins{
+    position: relative;
     transition: cubic-bezier(0.19, 1, 0.22, 1) 0.6s;
     position: absolute;
     top: 60%;
@@ -308,6 +311,7 @@ html,body{
     height: 250px;
     flex-shrink: 0;
     width: 350px;
+    position: relative;
     padding: 20px;
 }
 #pin #thumbnail{
@@ -389,8 +393,15 @@ html,body{
     overflow: hidden;
     width: 100%;
 }
-ri-delete-bin-7-fill{
+.ri-delete-bin-7-fill{
     position: absolute;
-    top: 10px;
-    right: 10px;
+    bottom: -15px;
+    background-color: rgb(216, 216, 216);
+    right: 20px;
+    z-index: 9999999;
+    padding: 6px;
+    border-radius: 50%;
+}
+.ri-delete-bin-7-fill:hover{
+    transform: scale(1.1);
 }

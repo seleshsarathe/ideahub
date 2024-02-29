@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-mongoose.connect("mongodb://localhost/ideashub")
+mongoose.connect("mongodb://0.0.0.0:27017/ideashub")
 
 const imageSchema = mongoose.Schema({
   createduser:{type: mongoose.Schema.Types.ObjectId, ref:"user" },

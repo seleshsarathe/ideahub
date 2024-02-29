@@ -14,15 +14,15 @@ document.querySelector("#middle input").addEventListener("keydown",(data)=>{
         window.location.href = `/search/${document.querySelector("#middle input").value}`
     }
 })
-// function add_album(){
-//     axios.post('/getcreatedpins', {
+function delete_album(){
+    axios.post('/delete/album', {
+        naam : "hehe"
+      })
+      .then((response) => {
+        console.log(response);
         
-//       })
-//       .then((response) => {
-//         console.log(response);
-        
-//     })
-// }
+    })
+}
 function add_name(){
     axios.post('/addname', {
         nama : document.querySelector("#addname #naam").value
@@ -41,23 +41,27 @@ function add_name(){
 // }
 const res = async () => {
     var response = await axios.get('/profilealbums')
-    console.log(response)
+    console.log(response.data)
     for (data in response.data){
         if(response.data[data].length > 2){
+            console.log("3 images set")
             document.querySelector(`.${data} #one img`).setAttribute("src",response.data[data][0])
             document.querySelector(`.${data} #two img`).setAttribute("src",response.data[data][1])
             document.querySelector(`.${data} #three img`).setAttribute("src",response.data[data][2])
             document.querySelector(`.${data}`).style.display = "inherit"
         }
         else{
+            console.log(`.${data}`)
             document.querySelector(`.${data} #one`).style.width = "100%"
             document.querySelector(`.${data} #two`).style.display = "none"
             document.querySelector(`.${data} #three`).style.display = "none"
             if(response.data[data].length < 1){
+                console.log(`0 images set ${data}`) 
                 document.querySelector(`.${data} #one img`).setAttribute("src","https://cdn.pixabay.com/photo/2017/11/10/05/24/add-2935429_960_720.png" )
-                document.querySelector(`#overlay${data}` ).setAttribute("href","/home" )
+                // document.querySelector(`#overlay${data}` ).setAttribute("href","/home" )
             }
             else{
+                console.log("1 images set")
                 document.querySelector(`.${data} #one img`).setAttribute("src",response.data[data][0] )
 
             }
@@ -99,11 +103,12 @@ document.querySelector(".ri-add-fill").addEventListener("click",()=>{
 //     document.querySelector("#addname").style.display = "inherit"
 // })
 
-// document.querySelector("#overlay").addEventListener("click",()=>{
-//     document.querySelector("#overlay").style.display = "none"
-//     document.querySelector("#createboard").style.display = "none"
-//     document.querySelector("#addname").style.display = "none"
-// })
+document.querySelector("#overlay").addEventListener("click",()=>{
+    document.querySelector("#overlay").style.display = "none"
+    document.querySelector("#createboard").style.display = "none"
+    document.querySelector("#addname").style.display = "none"
+})
+
 document.querySelector("#createboard input").addEventListener("input",()=>{
     if(document.querySelector("#createboard input").value){
         document.querySelector("#createboard button").style.backgroundColor = "#9b1fe9"
@@ -114,16 +119,7 @@ document.querySelector("#createboard input").addEventListener("input",()=>{
         document.querySelector("#createboard button").style.backgroundColor = "#9b1fe950"
     }
 })
-document.querySelector("#addname input").addEventListener("input",()=>{
-    if(document.querySelector("#addname input").value){
-        document.querySelector("#addname button").style.backgroundColor = "#9b1fe9"
-        document.querySelector("#addname button").style.pointerEvents = "all"
-    }
-    else{
-        document.querySelector("#addname button").style.pointerEvents = "none"
-        document.querySelector("#addname button").style.backgroundColor = "#9b1fe950"
-    }
-})
+
 
 document.querySelector("#createboard #create").addEventListener("click",()=>{
     document.querySelector("#overlay").style.display = "none"
@@ -131,15 +127,14 @@ document.querySelector("#createboard #create").addEventListener("click",()=>{
     add_album()
 })
 
-document.querySelector("#addname #add").addEventListener("click",()=>{
-    document.querySelector("#overlay").style.display = "none"
-    document.querySelector("#addname").style.display = "none"
-    add_name()
-})
+
 
 res()
 
 document.querySelector("#pin").addEventListener("click",(data)=>{
-    console.log(data.target.id)
+    console.log(data)
 })
 
+document.querySelector("#share").addEventListener("click",(data)=>{
+    navigator.clipboard.writeText(document.querySelector("#share").getAttribute("class"));
+})

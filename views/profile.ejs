@@ -25,7 +25,7 @@
             <div id="right">
                 <a href="/home"><h5>pins</h5></a>
                 <a href="/pin-builder"><h5>post</h5></a>
-                <a href="/logout"><h4>logout</h4></a>
+                <a href="/logout" style="display: <%=pice ? "inherit" : "none"%>;"><h4>logout</h4></a>
                  <a href="/profile"><div id="pp"><img src="<%=user.profilepic%>" alt=""></div></a>
                 </div>
             </div>
@@ -39,12 +39,12 @@
                 <p><%=user.followers.length%> followers</p>
             </div>
             <div id="buttons">
-                <a href="/<%=url%>"><button id="share">Share</button></a>
+                <button id="share" class="<%=url + "/" + user._id%>">Share</button>
                 <a href="/editprofile"><button>Edit Profile</button></a>
             </div>
             <div id="view">
                 <p id="created">Created</p>
-                <p id="saved">Saved</p>
+                <p id="saved" class="<%=url%>">Saved</p>
             </div>
         </div>
         <i class="ri-add-fill"></i>
@@ -53,7 +53,6 @@
                 <a href="savedpins/<%=data%>" id="overlay<%=data%>">
                     <div id="pin">
                         <div id="thumbnail" class="<%=data%>">
-                            <i class="ri-delete-bin-7-fill"></i>
                             <div id="one"><img src="" alt=""></div>
                             <div id="two"><img src="" alt=""></div>
                             <div id="three"><img src="" alt=""></div>
@@ -61,6 +60,7 @@
                         <label for="thumbnail"><%=data%></label>
                     </div>
                 </a>
+                
            <% }) %>
             
         </div>

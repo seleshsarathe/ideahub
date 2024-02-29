@@ -144,11 +144,13 @@ router.get('/profilealbums',isLoggedIn, function(req, res, next) {
     pins[deta] = []
   })
     saved.forEach((data)=>{
+      console.log(data)
     pins.allpins.push(data.pin)
     // console.log(pins)
     if(data.sharedto != "allpins"){
       pins[data.sharedto].push(data.pin)
     }
+  
   })
   console.log(pins)
 
@@ -184,13 +186,8 @@ router.get('/profile',isLoggedIn,async function(req, res, next) {
   user =  await req.user.populate("pins")
   console.log(user,"USERDATA")
   user.savedpins.reverse()
-  // if(user.savedpins.length > 3){
-  //   pins = user.savedpins.slice(0,3)
-  // }
-  // else{
-  //   pins = user.savedpins[0]
-  // }
-  res.render('profile', {user,url:req.protocol + '://' + req.get('host') + req.originalUrl});
+  pice = true
+  res.render('profile', {user,pice,url:req.protocol + '://' + req.get('host') + req.originalUrl});
 });
 
 router.get('/deletecomment/:id/:img',isLoggedIn,async function(req, res, next) {
@@ -219,17 +216,33 @@ router.post('/getpindetails',isLoggedIn,async function(req, res, next) {
 })
 
 router.get('/profile/:id',async function(req, res, next) {
-  if(user){
+  var pice = null
+  if(req.user){
+    user = await userModel.findOne({_id:req.params.id}).populate("pins")
+    var pice = true 
     if(req.params.id === String(req.user._id)){
-    user = await req.user.populate("pins")
-    user.savedpins.reverse()
-
-    res.render('profile', {user,url:req.protocol + '://' + req.get('host') + req.originalUrl});
-  }}
+      user.savedpins.reverse()
+      res.render('profile', {user,pice,url:req.protocol + '://' + req.get('host') + req.originalUrl});
+      console.log(`${pice} profile`)  
+    }
+    else{
+      user =  await userModel.findOne({_id:req.params.id}).populate("pins")
+      console.log(user,"USERDATA")
+      user.savedpins.reverse()
+      if(req.user){
+        var userid = req.user._id
+      }
+      else{
+        var userid = false
+      }
+      console.log(`${pice} profile copy`)
+      res.render('profile copy', {user,pice,userid,pic:req.user.profilepic,url:req.protocol + '://' + req.get('host') + req.originalUrl});
+    
+    }
+  }
   else{
-    var pins = []
+    pic = `/images/profilepic/default.jpeg`
     user =  await userModel.findOne({_id:req.params.id}).populate("pins")
-    console.log(user,"USERDATA")
     user.savedpins.reverse()
     if(req.user){
       var userid = req.user._id
@@ -237,7 +250,10 @@ router.get('/profile/:id',async function(req, res, next) {
     else{
       var userid = false
     }
-    res.render('profile copy', {user,userid,pic:req.user.profilepic});
+    var pice = null
+    console.log(pice,"----------------------------------------------------------------------------------pice")
+    res.render('profile copy', {user,pice,userid,pic});
+  
   }
 });
 
@@ -250,15 +266,22 @@ const pins = []
 router.get('/savedpins/:name',isLoggedIn,async function(req, res, next) {
   loggedInUser = req.user
   console.log(loggedInUser.savedpins)
-  res.render("savedpins",{pin:loggedInUser.savedpins,name:req.params.name})
+  if(req.params.name === "allpins"){
+    show = false
+  }
+  else{
+    show = true
+  }
+  res.render("savedpins",{show,pin:loggedInUser.savedpins,name:req.params.name})
 
 });
 
-router.get('/savedpins/:name/:id',isLoggedIn,async function(req, res, next) {
+router.get('/savedpins/:name/:id',async function(req, res, next) {
   console.log(req.params.id)
   loggedInUser = await userModel.findOne({_id:req.params.id})
   console.log(loggedInUser)
-  res.render("savedpins",{pin:loggedInUser.savedpins,name:req.params.name})
+  show = false
+  res.render("savedpins",{show,pin:loggedInUser.savedpins,name:req.params.name})
 
 });
 
@@ -300,6 +323,18 @@ router.get('/search/:property',async function(req, res, next) {
   console.log(pins)
 res.render("home-search",{deta:pins,user:req.user})
 });
+
+router.post('/delete/album',isLoggedIn,async function(req, res, next) {
+  console.log(req.body.nama)
+  loggedInUser = await userModel.findOneAndUpdate({_id:req.user._id},{$pull:{albums:req.body.nama}})
+  loggedInUser.savedpins.forEach((data)=>{
+    if(data.sharedto === req.body.nama){
+      data.sharedto = "allpins"
+    }
+  })
+  loggedInUser.save()
+  res.send("sex")
+})
 
 router.post('/comment',isLoggedIn,async function(req, res, next) {
   var loggedInUser = req.user
@@ -475,7 +510,7 @@ router.post("/signup",isLogedOut,function(req,res){
     username: req.body.username,
     age: req.body.age,
     email: req.body.email,
-    profilepic: "/images/profilepic/default.jpg"
+    profilepic: "/images/profilepic/default.jpeg"
   })
   userModel.register(newUser,req.body.password)
   .then(async function(data){
@@ -511,8 +546,8 @@ function isLogedOut(req,res,next){
   }
 }
 
-router.use((req, res, next) => {
-  res.status(404).redirect("/");
-});
+// router.use((req, res, next) => {
+//   res.status(404).redirect("/");
+// });
 
 module.exports = router;

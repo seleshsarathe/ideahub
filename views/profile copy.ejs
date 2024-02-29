@@ -25,26 +25,26 @@
             <div id="right">
                 <a href="/home"><h5>pins</h5></a>
                 <a href="/pin-builder"><h5>post</h5></a>
-                <a href="/logout" ><h4>logout</h4></a>
+                <a href="/logout" style="display: <%=pice ? "inherit" : "none"%>;" ><h4>logout</h4></a>
                  <a href="/profile"><div id="pp"><img src="<%=pic%>" alt=""></div></a>
                 </div>
             </div>
         
         <div id="top">
             <div id="propic"><img src="<%=user.profilepic%>" alt=""></div>
-            <div id="name"><%=user.name ? user.name : "add name"%></div>
+            <div id="name"><%=user.name ? user.name : user.username%></div>
             <div id="username" class="<%=user._id%>">@<%=user.username%></div>
             <div id="followers">
                 <p><%=user.following.length%> following</p>
                 <p><%=user.followers.length%> followers</p>
             </div>
             <div id="buttons">
-                <a href=""><button id="share">Share</button></a>
+                <button id="share" class="<%=url%>">Share</button>
                 <button id="follow" class="<%=userid%>"><%= user.followers.includes(userid) ? "following" : "follow"%></button>
             </div>
             <div id="view">
                 <p id="created">Created</p>
-                <p id="saved">Saved</p>
+                <p id="saved" class="<%=url%>">Saved</p>
             </div>
         </div>
         <i style="display: none;" class="ri-add-fill"></i>

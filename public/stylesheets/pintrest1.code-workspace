@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../../../../Downloads/shoppingsite-main"
+		},
+		{
+			"path": "../.."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Pintrest"
+	}
+}

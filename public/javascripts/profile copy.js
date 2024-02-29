@@ -4,6 +4,7 @@ document.querySelector("#middle input").addEventListener("keydown",(data)=>{
         window.location.href = `/search/${document.querySelector("#middle input").value}`
     }
 })
+
 function follow(){
     axios.post('/follow', {
         username : document.querySelector("#top #username").textContent.slice(1)
@@ -55,7 +56,9 @@ const res = async () => {
         }
     }
   };
-
+document.querySelector("#share").addEventListener("click",(data)=>{
+    navigator.clipboard.writeText(document.querySelector("#share").getAttribute("class"));
+})
 // if(document.querySelector("#top #name").textContent === "add name"){
 //     document.querySelector("#top #name").style.cursor = "pointer" 
 // }

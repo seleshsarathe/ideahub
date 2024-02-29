@@ -27,6 +27,8 @@
         </div>
     </div>
     
+    <p id="deleteal" style="display: <%= show ? 'inherit' : 'none'%> ;">Delete Album</p> 
+    
     <div class="pin_container">
       <%pin.forEach((data)=>{ %>
         <%if(name === "allpins"){%>
@@ -35,7 +37,7 @@
             </div>
         <% }else{ %>
             <%if (data.sharedto === name){ %>
-                <div class="card">
+                <div class="card" id="<%=name%>">
                     <img id="<%=data.pinid%>" src="<%=data.pin%>" alt="">
                 </div>
             <% } %>
@@ -44,6 +46,7 @@
          
         
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.2/axios.min.js" integrity="sha512-bHeT+z+n8rh9CKrSrbyfbINxu7gsBmSHlDCb3gUF1BjmjDzKhoKspyB71k0CIRBSjE5IVQiMMVBgCWjF60qsvA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="/javascripts/savedpins.js"></script>
 </body>
 
